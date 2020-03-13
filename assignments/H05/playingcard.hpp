@@ -1,3 +1,4 @@
+//organizationally this is an absolute disaster but I will sort through that later
 #include "termio.h"
 #include <algorithm> // std::random_shuffle
 #include <iostream>
