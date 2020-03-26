@@ -111,7 +111,7 @@ void CardContainer::Reset() {
 }
 
 void CardContainer::Shuffle() {
-  srand(time(0));
+  //srand(time(0));
     for (int i = 0; i < Cards.size() - 1; i++) {
         int j = i + rand() % (Cards.size() - i);
         swap(Cards[i], Cards[j]);
@@ -176,7 +176,7 @@ public:
 };
 
 void Hand::Shuffle(){
-srand(time(0));
+//srand(time(0));
   for (int i = 0; i < Cards.size() - 1; i++) {
         int j = i + rand() % (Cards.size() - i);
         swap(Cards[i], Cards[j]);
