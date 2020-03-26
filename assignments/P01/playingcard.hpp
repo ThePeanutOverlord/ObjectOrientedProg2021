@@ -7,8 +7,8 @@
 
 using namespace std;
 
-struct BackColor{
-    string default;
+struct ForeColor{
+    string base;
     string black;
     string red;
     string yellow;
@@ -18,8 +18,8 @@ struct BackColor{
     string magenta;
     string white;
 
-    BackColor(){
-        default = "&00";
+    ForeColor(){
+        base = "&00";
         black = "&10";
         red = "&20";
         yellow = "&30";
@@ -31,8 +31,8 @@ struct BackColor{
     }
 };
 
-struct ForeColor{
-    string default;
+struct BackColor{
+    string base;
     string black;
     string red;
     string yellow;
@@ -42,8 +42,8 @@ struct ForeColor{
     string magenta;
     string white;
 
-    ForeColor(){
-        default = "&10";
+    BackColor(){
+        base = "&10";
         black = "&11";
         red = "&12";
         yellow = "&13";
@@ -56,6 +56,8 @@ struct ForeColor{
 };
 class Card {
 private:
+    const string ranks[13] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+    const string suits[4] = {"♠", "♦", "♣", "♥"};
     int suitNum;     // value 0-3 : num index of suit
     int rank;        // 0-13      : num value of rank
     int number;      // 1-52      : unique value determines card
@@ -64,8 +66,7 @@ private:
     string rankChar; // Ace, 1 ,2 ,3 ... Q, K
     string color;    // Spade=blue, Diamond=red, etc.
     // Card labels (could be "Iron Man" or "Charmander" or "Elf" ... anything)
-    const string ranks[13] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-    const string suits[4] = {"♠", "♦", "♣", "♥"};
+
 
 public:
     friend ostream;
@@ -83,21 +84,29 @@ public:
     void setCharacterColor(string color);        // set symbol color 
     void setNumberColor(string color);          // set number color
     void setColors(string fore, string back, string symbol, string number);
+    void baseColors();
     // and any other overloaded convenience methods you want to add. 
 
 };
 
-void Card::setColors(string fore, string back, string symbol, string number){
-    setForegroundColor(fore);       // set foreground color of card
+void Card::baseColors(){
+    if(suitNum == 0 || suitNum == 2){
+        setColors("green", "white", "green", "green");
+    }else if(suitNum == 1 || suitNum == 3){
+        setColors("red", "white", "red", "red");
+    }
+}
+
+void Card::setColors(string main, string back, string symbol, string number){
+    setForegroundColor(main);       // set foreground color of card
     setBackgroundColor(back);   
     setCharacterColor(symbol);        // set symbol color 
     setNumberColor(number);  
 }
 
-
 void Card::setNumberColor(string color){
-    if(color == "default"){
-        rankChar = ForeColor().default;
+    if(color == "base"){
+        rankChar = ForeColor().base;
     }
     if(color == "black"){
         rankChar = ForeColor().black;
@@ -127,8 +136,8 @@ void Card::setNumberColor(string color){
 
 
 void Card::setCharacterColor(string color){
-    if(color == "default"){
-        suitChar = ForeColor().default;
+    if(color == "base"){
+        suitChar = ForeColor().base;
     }
     if(color == "black"){
         suitChar = ForeColor().black;
@@ -162,8 +171,8 @@ void Card::setColors(string fore,string back){
 
 }
 void Card::setBackgroundColor(string color){ 
-    if(color == "default"){
-        color = BackColor().default;
+    if(color == "base"){
+        color = BackColor().base;
     }
     if(color == "black"){
         color = BackColor().black;
@@ -192,8 +201,8 @@ void Card::setBackgroundColor(string color){
 }
 
 void Card::setForegroundColor(string color){
-    if(color == "default"){
-        color = ForeColor().default;
+    if(color == "base"){
+        color = ForeColor().base;
     }
     if(color == "black"){
         color = ForeColor().black;
@@ -238,7 +247,7 @@ Card::Card(int num) {
     number = num;
     suitNum = number / 13;
     suitChar = suits[suitNum];
-    color = colors[suitNum];
+    baseColors();
     rank = number % 13;
     rankChar = ranks[rank];
 }
@@ -259,13 +268,31 @@ Card::Card(int num) {
      */
 string Card::Repr() {
     string s = "";
-    s += color + "┌────┐&00 \n";
-    s += color + "│";
-    if (rank != 9) {
-        s += color + " ";
+    s += color + "┌──────────┐&00 \n";
+    if(rank == 9){
+      s += color + "│ " + suitChar + " " + rankChar + "&00      " + "|&00 \n";
+    }else{
+       s += color + "│ " + suitChar + " " + rankChar + "&00       " + "|&00 \n";
     }
-    s += color + rankChar + " " + suitChar + "│&00 \n";
-    s += color + "└────┘&00 ";
+    s += color + "|          |&00 \n";
+    s += color + "|          |&00 \n";  
+    if(rank == 9){
+    s += color + "│    " + suitChar + " " + rankChar + "&00   " + "|&00 \n";
+    }else{
+      s += color + "│    " + suitChar + " " + rankChar + "&00    " + "|&00 \n";
+    }
+    s += color + "|          |&00 \n";
+    s += color + "|          |&00 \n";  
+    if(rank==9){
+    s += color + "│       " + suitChar + " " + rankChar + "&00" + "|&00 \n";
+    }else{
+    s += color + "│       " + suitChar + " " + rankChar + "&00 " + "|&00 \n";
+    }
+    s += color + "└──────────┘&00 \n";
+    /*if (rank != 9) {
+        s += color + " ";
+    }*/
+
     return s;
 }
 /**
