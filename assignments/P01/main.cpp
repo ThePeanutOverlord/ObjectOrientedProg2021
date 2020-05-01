@@ -1,3 +1,23 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   
+// Author:           Paige Champagne
+// Email:            paigechamp@gmail.com
+// Label:            program 1
+// Title:            game of war
+// Course:           CMPS 2143
+// Semester:         Spring 2020
+//
+// Description:
+//          this is the driver for the program
+//
+// Usage:
+//       controls the program
+//
+// Files:           main.cpp
+//                  playingcard.hpp
+//                  poker_game.hpp
+//                  termio.h
+/////////////////////////////////////////////////////////////////////////////////
 #include "poker_game.hpp"
 #include <iomanip>
 
