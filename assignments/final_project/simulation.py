@@ -220,12 +220,15 @@ class Simulation:
     returns:    self.R
     '''
     def calcR(self):
-      p = self.get_infected()
-      sum = 0;
-      for i in (self.pop):
-          sum += i.encounters
-      self.R = sum / p
-      return self.R
+        p = self.get_infected()
+        if p != 0:
+            sum = 0
+            for i in (self.pop):
+                sum += i.encounters
+            self.R = sum / p
+        else:
+            self.R = 0
+        return self.R
 
 
 '''         
