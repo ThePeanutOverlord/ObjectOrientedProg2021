@@ -6,6 +6,6 @@
 | 04-H03 | [H03](H03/main.cpp)   | Overloading Operators |
 | 05-H04 | [H04](H04/README.md)   | Poker Game Design |
 | 06-H05 | [H05](H05/playingcard.hpp)   | Playing Cards |
-| 07-P01 | [P01](P01/main.cpp)   | Poker Game |
+| 07-P01 | [P01](P01)   | Poker Game |
 | 08-P03 | [P03](P03/uml.jpg)   | Modeling COVID-19 Part 1 |
 | 09-P03 | [P03](final_project/readme.md)   | Modeling COVID-19 Part 2 |
