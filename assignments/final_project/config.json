@@ -1,0 +1,35 @@
+{
+    "sprite": {
+        "width": 8,
+        "height": 20,
+        "speed": 2
+    },
+    "images": {
+        "blue": "./images/person_blue_64x64.png",
+        "light_blue": "./images/person_light_blue_64x64.png",
+        "red": "./images/person_red_64x64.png",
+        "white": "./images/person_white_64x64.png",
+        "yellow": "./images/person_yellow_64x64.png",
+        "orange": "./images/person_orange_64x64.png",
+        "green": "./images/person_green_64x64.png",
+        "black": "./images/person_black_64x64.png"
+    },
+    "game": {
+        "width": 800,
+        "height": 625,
+        "fps": 40,
+        "loop_count": 0
+    },
+    "sim": {
+        "social_distancing": "true",
+        "social_distance": 20,
+        "infection_radius": 10,
+        "infection_rate": 0.25,
+        "population_count": 300,
+        "pid": 1,
+        "communities": 4,
+        "initial_infected": 0.05,
+        "initial_susceptible": 0.95,
+        "infection_duration": 10
+    }
+}
